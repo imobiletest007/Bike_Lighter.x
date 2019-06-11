@@ -191,7 +191,9 @@ void main(void)
 //                if (dx > 0 || dy > 0 || dz > 0) {
                 if (last_sensor>10)
                 {
-                    light_level=10;
+//                    light_level=10;
+                    light_level-=2;
+                    if (light_level<=10) light_level = 10;
                 }else 
                 {
 //                    light_level=499;
