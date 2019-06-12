@@ -127,13 +127,13 @@ void main(void)
                 if (last_sensor>10)
                 {
 //                    light_level=10;
-                    light_level-=2;
-                    if (light_level<=10) light_level = 10;
+                    light_level-=20;
+                    if (light_level<=20) light_level = 20;
                 }else 
                 {
 //                    light_level=499;
                     light_level+=10;
-                    if (light_level>=499) light_level = 499;
+                    if (light_level>=699) light_level = 699;
                 }
                 EPWM1_LoadDutyValue(light_level);
                 if (!pause) printf("sensor = %d (%d, %d, %d)\r\n", last_sensor, dx, dy, dz);
