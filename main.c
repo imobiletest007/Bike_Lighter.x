@@ -80,61 +80,7 @@ int gx2=0, gy2=0, gz2=0;
 int dx=0, dy=0, dz=0;
 
 int light=5;
-int duty[11] = { 499, 495, 480, 459, 409, 359, 299, 249, 199, 99, 0 };
-void pwm_light(int idx) {
-    if (idx < 0) idx = 0;
-    else if (idx > 10) idx = 10;
-    if (idx == 0) duty[0] = 501; //  A BUG
-    EPWM1_LoadDutyValue(duty[idx]);
-}
-void UART_Demo_Command_INT(void)
-{
-    uint8_t temp;
-    if(EUSART2_is_rx_ready())
-    {
-        temp=EUSART2_Read();  // read a byte for RX
-        EUSART2_Write(temp);  // send a byte to TX  (from Rx)
 
-        switch(temp)    // check command  
-        {
-            case 'H':
-            case 'h':
-            {
-                ++light;
-                if (light >= 10) light = 10;
-                pwm_light(light);
-                printf("+ : duty %d  light %d\r\n", duty[light], light);
-                break;
-            }
-            case 'L':
-            case 'l':
-            {
-                --light;
-                if (light < 0) light = 0;
-                pwm_light(light);
-                printf("- : duty %d  light %d\r\n", duty[light], light);
-                break;
-            }
-            case 'P':
-            case 'p':
-            {
-                pause = pause?0:1;
-                break;
-            }
-            case 'V':
-            case 'v':
-            {
-                UART_Show_Version();
-                break;
-            }
-            default:
-            {
-                printf("? : other key '%c'", temp);
-                break;
-            }
-        }
-    }
-}
 static void UART_Show_Version(void)
 {
     printf("\r\nRTC from Neil, modified by wade 12\r\n");
@@ -156,25 +102,14 @@ void main(void)
     INTERRUPT_PeripheralInterruptEnable();
 
     g_sensor_initial();//sleep ok
-    wake_up_initial();
+//    wake_up_initial();
     UART_Show_Version();
-
-    /* ?????????????? TMR1 ???, ????
-    TRISCbits.TRISC0 = 0;
-    LATCbits.LATC0 =0;
-    __delay_ms(10);
-    LATCbits.LATC0 =1;
-    __delay_ms(10);
-    LATCbits.LATC0 =0;
-    NOP();
-    NOP();     
-     */
 
     motion_sensor_write_data(0xC8,MOTION_SENSOR_INT_CTRL_REG1);	//enable all INT1 interrupt funs
     motion_sensor_write_data(0x00,MOTION_SENSOR_ATH);	//enable all INT1 interrupt funs    
 
-    while (1) {
-        UART_Demo_Command_INT();
+    while (1) 
+    {
         if (acc_sensor_get_acc()) {
             acc_sensor_read_status();
             acc_sensor_clear_interrupt_status(); // it can read G-sensor INT 
@@ -199,18 +134,9 @@ void main(void)
 //                    light_level=499;
                     light_level+=10;
                     if (light_level>=499) light_level = 499;
-//                    if (light_level<450 && light_level>0)
-//                    {
-//                        light_level=light_level+3;
-//                    }else
-//                    {
-//                        light_level=499;
-//                    
                 }
                 EPWM1_LoadDutyValue(light_level);
-//                    pwm_light(last_sensor);
-                    if (!pause) printf("sensor = %d (%d, %d, %d)\r\n", last_sensor, dx, dy, dz);
-//                }
+                if (!pause) printf("sensor = %d (%d, %d, %d)\r\n", last_sensor, dx, dy, dz);
             }
         }
     }
@@ -247,7 +173,7 @@ void g_sensor_initial(void)
         g_sensor_vision();
 }
 
-void wake_up_initial(void)
+/*void wake_up_initial(void)
 {
     INTCONbits.INT0IE =  1;
     INTCONbits.INT0IF  = 0;
@@ -257,7 +183,7 @@ void wake_up_initial(void)
     INTCON3bits.INT2IF = 0;
 
 
-}
+}*/
 
 #ifndef WADE
 void ready_to_sleep(void)
