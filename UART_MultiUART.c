@@ -946,7 +946,7 @@ void main_2 (void) {
         for ( i=0; i<4; i++)
         {
            putdata (master_header[i]);
-           for (j=0;j< UART_DELAY;j++);
+//           for (j=0;j< UART_DELAY;j++);
          }
          //    for ( i=0; i<20; i++)
           //         {
@@ -1183,7 +1183,7 @@ void store_data (unsigned char cc)
                    for ( i=0; i<15 ; i++)
                    {
                        putdata (master_contro2[i]);
-                       for (j=0;j< UART_DELAY;j++);
+//                       for (j=0;j< UART_DELAY;j++);
                        //  for (j=0;j< 5000;j++);
                    }
                    rs232_s=302;
@@ -1191,7 +1191,7 @@ void store_data (unsigned char cc)
 	               for ( i=0; i<20 ; i++)
                    {
                        putdata (master_control[i]);
-                       for (j=0;j< UART_DELAY;j++);
+ //                      for (j=0;j< UART_DELAY;j++);
                        //  for (j=0;j< 5000;j++);
                  }
                    rs232_s=300;
@@ -1916,7 +1916,7 @@ void step03(void)
 			putdata (Header0[i]);
 	    else
 			putdata (Header[i]); 
-	   for (j=0;j< UART_DELAY;j++);
+//	   for (j=0;j< UART_DELAY;j++);
 	 }
 	  rs232_s=4;
 	   wait_bytes=0;
@@ -1940,7 +1940,7 @@ void step03(void)
 #else          
        putdata (LCD_BUF0[lcd_buf_index++]);
 #endif      
-       for (j=0;j< UART_DELAY;j++);
+//       for (j=0;j< UART_DELAY;j++);
 	} 
 	wait_bytes=0;
 	rs232_s=6; //end
@@ -1963,7 +1963,7 @@ void step03(void)
 #else          
        putdata (LCD_BUF0[lcd_buf_index++]);
 #endif 
-           for (j=0;j< UART_DELAY;j++);
+//           for (j=0;j< UART_DELAY;j++);
         }
       }
       else    
@@ -1979,7 +1979,7 @@ void step03(void)
 #else          
        putdata (LCD_BUF0[lcd_buf_index++]);
 #endif 
-           for (j=0;j< UART_DELAY;j++);
+//           for (j=0;j< UART_DELAY;j++);
         }
       }
 	wait_bytes=0;
@@ -2074,7 +2074,7 @@ void step07 (void)
 #else          
        putdata (LCD_BUF0[lcd_buf_index++]);
 #endif 
-	   for (j=0;j< UART_DELAY;j++);
+//	   for (j=0;j< UART_DELAY;j++);
 	}
 	wait_bytes=0;
    
@@ -2105,7 +2105,7 @@ void step08(void)
 #else          
        putdata (LCD_BUF0[lcd_buf_index++]);
 #endif 
-	    for (j=0;j< UART_DELAY;j++);
+//	    for (j=0;j< UART_DELAY;j++);
 	}
    	wait_bytes=0;
 	rs232_s=81; //end
@@ -2131,7 +2131,7 @@ void step081(void)
 #else          
        putdata (LCD_BUF0[lcd_buf_index++]);
 #endif 
-	    for (j=0;j< UART_DELAY;j++);
+//	    for (j=0;j< UART_DELAY;j++);
 	}
 	wait_bytes=0;
     lcd_buf_index=0;
@@ -2485,14 +2485,14 @@ for ( i=0; i<25 ; i++)
 	{
 	 putdata (status3[cc++]);
 	// for (j=0;j<BYTE_DELAY;j++);
-       for (j=0;j<UART_DELAY;j++);
+//       for (j=0;j<UART_DELAY;j++);
 	 }
 //for (j=0;j<1000;j++);
 for ( i=0; i<2 ; i++)
 	{
 	 putdata (status3[cc++]);
 	// for (j=0;j<BYTE_DELAY;j++);
-       for (j=0;j<UART_DELAY;j++);
+//       for (j=0;j<UART_DELAY;j++);
 	 }
      rs232_s=102; //end
        wait_bytes=0;
@@ -2512,7 +2512,7 @@ for ( i=0; i<2 ; i++)
 	{
 	 putdata (status0[cc++]);
 	// for (j=0;j<BYTE_DELAY;j++);
-       for (j=0;j<UART_DELAY;j++);
+//       for (j=0;j<UART_DELAY;j++);
 	 }
      rs232_s=102; //end
        wait_bytes=0;
@@ -2556,7 +2556,7 @@ if( nowCC== 0x60||nowCC== 0xE0)
       for ( i=0; i<4 ; i++)
    {
 	   putdata (LCD_BUF00[241+i]);
-	    for (j=0;j< UART_DELAY;j++);
+//	    for (j=0;j< UART_DELAY;j++);
     }
 }
  rs232_s=301;   
@@ -2572,7 +2572,7 @@ if( nowCC== 0x60||nowCC== 0xE0)
             putcLCD(' ');
         #endif
   	   putdata (0x9F);
-	    for (j=0;j< UART_DELAY;j++);
+//	    for (j=0;j< UART_DELAY;j++);
       putdata (0xFF);
 	  
 }
@@ -2731,7 +2731,7 @@ void sendHeadOut (unsigned int DataSS,unsigned int DataS ,unsigned char flag)
           putdata (Header2[i]);
         else 
 	       putdata (Header[i]);
-	    for (j=0;j< UART_DELAY;j++);
+//	    for (j=0;j< UART_DELAY;j++);
 	  }
 }
 void sendDataOut (unsigned int start , unsigned int ended , unsigned char checksuml ,unsigned char checksumh )
@@ -2739,7 +2739,7 @@ void sendDataOut (unsigned int start , unsigned int ended , unsigned char checks
          for ( i=start; i<ended ; i++)
          {
             putdata (LCD_BUF[lcd_buf_index++]);
-            for (j=0;j< UART_DELAY;j++);
+//            for (j=0;j< UART_DELAY;j++);
          }
         putdata ( checksuml);
         for (j=0;j<100;j++);
@@ -4137,7 +4137,7 @@ void UART1_WaitEmpty (void)
     
      while ( PIE1bits.TX1IE)
      {
-           for (j=0;j< UART_DELAY;j++);
+//           for (j=0;j< UART_DELAY;j++);
      } //Wait for 
     while ( EUSART1_DataReady)
      {
@@ -4146,7 +4146,7 @@ void UART1_WaitEmpty (void)
                     IO_RC2_Toggle();
         
                     rc=EUSART1_Read();
-                     for (j=0;j< UART_DELAY;j++);
+//                     for (j=0;j< UART_DELAY;j++);
     }       
 }
 void UART1_Clear (void)

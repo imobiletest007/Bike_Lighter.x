@@ -50,7 +50,7 @@
 
 #define uint16_t unsigned int
 #define uint8_t unsigned char
-void MS_Delay(uint16_t value);
+//void MS_Delay(uint16_t value);
 void motion_senosr_interface_init(void);
 void motion_sensor_send_byte(uint8_t send_byte);
 uint8_t motion_sensor_get_byte(void);

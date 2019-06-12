@@ -159,10 +159,10 @@ extern "C" {
 //#define BATTERY_LOW 682   
 #define BATTERY_LOW 650    
 #define UART_INIT 0x8088    //0x8008
-#define PACKET_DELAY1 6
-#define PACKET_DELAY2 60000
+//#define PACKET_DELAY1 6
+//#define PACKET_DELAY2 60000
 
-#define BYTES_DELAY 6000
+//#define BYTES_DELAY 6000
 #define HEADER_SIZE 20
 #define HEADER_BUFFER (HEADER_SIZE+2)
 
@@ -362,7 +362,7 @@ extern	unsigned int i,j;
 #define UART_DELAY 50 //20170913
 #define EMPTY_DELAY 100
 #else
-#define UART_DELAY 50 //20170913
+//#define UART_DELAY 50 //20170913
 //#define EMPTY_DELAY 20000
 #define EMPTY_DELAY 50
 #endif

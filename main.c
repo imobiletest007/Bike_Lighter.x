@@ -153,7 +153,7 @@ void putrs2USART(const char *data)
 static void g_sensor_vision(void)
 {
 
-       __delay_ms(2);
+//       __delay_ms(2);
          M_G_SSI_SetLow();
          SPI1_Exchange8bit(MOTION_SENSOR_WHO_AM_I | 0x80 );
          g_vison=SPI1_Exchange8bit(NULL);
@@ -185,117 +185,7 @@ void g_sensor_initial(void)
 
 }*/
 
-#ifndef WADE
-void ready_to_sleep(void)
-{
 
-    //////////// it can off all
-    PIE1bits.ADIE = 0;
-    PIE1bits.RC1IE = 0;
-    PIE3bits.RC2IE = 0;
-
-    LATE = 0x00;    
-    LATD = 0x00;    
-    LATA = 0x00;    
-    LATB = 0x00;    
-    LATC = 0x00;    
-////    M_INDICATOR_SetHigh() ; 21uA-28uA;
-//////    //it is not for board
-//////    TRISE = 0x00;
-//////    TRISA = 0x00;
-//////    TRISB = 0x00;
-//////    TRISC = 0x00;
-//////    TRISD = 0x00;
-//////
-//////    ANSELC = 0x00;
-//////    ANSELB = 0x00;
-//////    ANSELD = 0x00;
-//////    ANSELE = 0x00;
-//////    ANSELA = 0x00;
-//////     //it is not for board
-//    //////////it need to open,  for board`
-     M_INDICATOR_SetHigh();//it need to open, it 30uA for board
-     LATCbits.LATC0 = 1;//it need to open,  it 4mA for board   
-     ///
-     LATDbits.LATD5 = 1;//it need to open,  it 4mA for board   
-     LATDbits.LATD2 = 1;//it need to open,  it 4mA for board   
-     LATCbits.LATC1 = 1;//it need to open,  it 4mA for board   
-       
-     OSCCON=0x00;  
-       //////////it need to open,  for board
-   // PIE1bits.ADIE = 0; ///ADD 2017_12_20
-//    if(BAUDCON2bits.RCIDL ==1)
-//    {
-//        BAUDCON2bits.WUE =1; // if it need wake up again, it need to add this in isr
-//        OSCCONbits.IDLEN=1;
-        Sleep();
-        __delay_ms(30);
-        SYSTEM_Initialize();
-        wake_up_initial();
-      TRISCbits.TRISC0 = 0;//    power_24_on_SetHigh() ;
-    LATCbits.LATC0 =0;//    power_24_on_SetHigh() ; TMR1_StartTimer();
-       __delay_ms(40);
-    LATCbits.LATC0 =1;//    power_24_on_SetHigh() ; TMR1_StartTimer();
-     __delay_ms(40);
-    LATCbits.LATC0 =0;//    power_24_on_SetHigh() ; TMR1_StartTimer();
-    NOP();
-     NOP();
-     com_bluetoooth_set();
-//        __delay_ms(5);
-//        BAUDCON2bits.WUE =0;
-    
-}
-
-uint8_t temp=0;
-unsigned char 	EEPROM_Data1 , EEPROM_Data2,EEPROM_Data3 ;
-unsigned char	SPI_Status ;
-unsigned char cc=0;
-
-void mcu18_spi_24_send(void)
-{
-
- SPI2_Exchange8bit(cc++);/////ex: 0x34  0x34 
-  EEPROM_Data1=SPI2_Exchange8bit(0x00);/////ex: 0x34  0x34 
-//     EEPROM_Data2 =SPI2_Exchange8bit(0x45);/////ex: 0x34  0x34 
-//     EEPROM_Data3 =SPI2_Exchange8bit(0x56);/////ex: 0x34  0x34  
-
-        #ifdef test
-       sprintf(str1, "EEPROM_Data1=%x EEPROM_Data2=%x EEPROM_Data3=%x  \r\n",EEPROM_Data1 , EEPROM_Data2,EEPROM_Data3);
-       putrs2USART(str1);  
-        #endif
-       NOP();
-       NOP();
-}
-void	SPI_Delay(void)
-{
-	int	LoopSPI ;
-	for (LoopSPI = 0 ; LoopSPI < 100 ; LoopSPI ++ ) ;
-
-}
-void g_sensor_int_value(void)
-
-{
-      #ifdef test
-            acc_sensor_clear_interrupt_status(); // it can read G-sensor INT 
-            sprintf(str1, "INT_STATUS=%x, \r\n",status2_value);
-            putrs2USART(str1);  
-            motion_sensor_write_data(int_value_temp,MOTION_SENSOR_ATH);	//ath    
-            ////if you want to change , it need to modify this .
-//            motion_sensor_write_data(0x0C,0x32);	//etilt_angle_ll default
-//            motion_sensor_write_data(0x2A,0x33);	//etilt_angle_HL default
-//            motion_sensor_write_data(0x1C,0x32);	//etilt_angle_ll
-//            motion_sensor_write_data(0x3A,0x33);	//etilt_angle_HL
-            sersonr_temp=motion_sensor_read_data(MOTION_SENSOR_ATH);
-            sprintf(str, "int_value_temp=%x,sersonr_temp=%x\r\n", int_value_temp,sersonr_temp);
-            putrs2USART(str);
-            ///
-                     ///
-         /////debug g_gensor_value
-//         sprintf(str1, "INS1=%x,INT_STATUS=%x,INS2=%x,INS3=%x,TSPP= %x,INT_REL=%x \r\n",status1_value,status2_value,status3_value,status5_value,status7_value);
-//         putrs2USART(str1);  
-          #endif
-}
-#endif
 /**
  End of File
 */

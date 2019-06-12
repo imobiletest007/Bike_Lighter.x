@@ -55,7 +55,7 @@
   Section: Flash Module APIs
 */
 
-uint8_t FLASH_ReadByte(uint32_t flashAddr)
+/*uint8_t FLASH_ReadByte(uint32_t flashAddr)
 {
     TBLPTRU = (uint8_t)((flashAddr & 0x00FF0000) >> 16);
     TBLPTRH = (uint8_t)((flashAddr & 0x0000FF00)>> 8);
@@ -64,14 +64,14 @@ uint8_t FLASH_ReadByte(uint32_t flashAddr)
     asm("TBLRD");
 
     return (TABLAT);
-}
+}*/
 
-uint16_t FLASH_ReadWord(uint32_t flashAddr)
+/*uint16_t FLASH_ReadWord(uint32_t flashAddr)
 {
     return ((((uint16_t)FLASH_ReadByte(flashAddr+1))<<8)|(FLASH_ReadByte(flashAddr)));
-}
+}*/
 
-void FLASH_WriteByte(uint32_t flashAddr, uint8_t *flashRdBufPtr, uint8_t byte)
+/* void FLASH_WriteByte(uint32_t flashAddr, uint8_t *flashRdBufPtr, uint8_t byte)
 {
     uint32_t blockStartAddr = (uint32_t)(flashAddr & ((END_FLASH-1) ^ (ERASE_FLASH_BLOCKSIZE-1)));
     uint8_t offset = (uint8_t)(flashAddr & (ERASE_FLASH_BLOCKSIZE-1));
@@ -88,9 +88,9 @@ void FLASH_WriteByte(uint32_t flashAddr, uint8_t *flashRdBufPtr, uint8_t byte)
 
     // Writes buffer contents to current block
     FLASH_WriteBlock(blockStartAddr, flashRdBufPtr);
-}
+}*/
 
-int8_t FLASH_WriteBlock(uint32_t writeAddr, uint8_t *flashWrBufPtr)
+/*int8_t FLASH_WriteBlock(uint32_t writeAddr, uint8_t *flashWrBufPtr)
 {
     uint32_t blockStartAddr  = (uint32_t )(writeAddr & ((END_FLASH-1) ^ (ERASE_FLASH_BLOCKSIZE-1)));
     uint8_t GIEBitValue = INTCONbits.GIE;     // Save interrupt enable
@@ -137,9 +137,9 @@ int8_t FLASH_WriteBlock(uint32_t writeAddr, uint8_t *flashWrBufPtr)
     INTCONbits.GIE = GIEBitValue;   // Restore interrupt enable
 
     return 0;
-}
+}*/
 
-void FLASH_EraseBlock(uint32_t baseAddr)
+/*void FLASH_EraseBlock(uint32_t baseAddr)
 {
     uint8_t GIEBitValue = INTCONbits.GIE;   // Save interrupt enable
 
@@ -156,7 +156,7 @@ void FLASH_EraseBlock(uint32_t baseAddr)
     EECON2 = 0xAA;
     EECON1bits.WR = 1;
     INTCONbits.GIE = GIEBitValue;   // Restore interrupt enable
-}
+}*/
 
 /**
   Section: Data EEPROM Module APIs
@@ -197,11 +197,11 @@ uint8_t DATAEE_ReadByte(uint16_t bAdd)
 
     return (EEDATA);
 }
-void MEMORY_Tasks( void )
+/*void MEMORY_Tasks( void )
 {
-    /* TODO : Add interrupt handling code */
+    // TODO : Add interrupt handling code 
     PIR2bits.EEIF = 0;
-}
+}*/
 /**
  End of File
 */
