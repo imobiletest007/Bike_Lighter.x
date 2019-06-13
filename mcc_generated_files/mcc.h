@@ -52,17 +52,18 @@
 #include "interrupt_manager.h"
 #include "spi1.h"
 #include "spi2.h"
-#include "tmr2.h"
+#include "adc.h"
+#include "eusart1.h"
 #include "epwm1.h"
 #include "eusart2.h"
-#include "eusart1.h"
+#include "tmr2.h"
 #include "tmr1.h"
 #include "adc.h"
 #include "memory.h"
 #include "ext_int.h"
 
-#define WADE 1
 #define _XTAL_FREQ  8000000
+
 
 /**
  * @Param

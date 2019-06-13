@@ -64,17 +64,17 @@ void TMR1_Initialize(void)
 {
     //Set the Timer to the options selected in the GUI
 
-    //T1CKPS 1:4; T1OSCEN disabled; T1SYNC do_not_synchronize; TMR1CS FOSC/4; TMR1ON off; T1RD16 disabled; 
-    T1CON = 0x24;
+    //T1CKPS 1:1; T1OSCEN disabled; T1SYNC do_not_synchronize; TMR1CS FOSC/4; TMR1ON off; T1RD16 disabled; 
+    T1CON = 0x04;
 
     //T1GSS T1G_pin; TMR1GE disabled; T1GTM disabled; T1GPOL low; T1GGO done; T1GSPM disabled; 
     T1GCON = 0x00;
 
-    //TMR1H 60; 
-    TMR1H = 0x3C;
+    //TMR1H 177; 
+    TMR1H = 0xB1;
 
-    //TMR1L 176; 
-    TMR1L = 0xB0;
+    //TMR1L 224; 
+    TMR1L = 0xE0;
 
     // Load the TMR value to reload variable
     timer1ReloadVal=TMR1;
@@ -157,7 +157,7 @@ uint8_t TMR1_CheckGateValueStatus(void)
     return T1GCONbits.T1GVAL;
 }
 uint8_t tmr1_flag_1s=0;
-uint8_t tmr1_flag_100ms=0;
+uint8_t tmr1_flag_10ms=0;
 void TMR1_ISR(void)
 {
     static volatile unsigned int CountCallBack = 0;
@@ -168,7 +168,7 @@ void TMR1_ISR(void)
     // Write to the Timer1 register
     TMR1H = (timer1ReloadVal >> 8);
     TMR1L = (uint8_t) timer1ReloadVal;
-    tmr1_flag_100ms=1;
+    tmr1_flag_10ms=1;
     // callback function - called every 10th pass
     if (++CountCallBack >= TMR1_INTERRUPT_TICKER_FACTOR)
     {

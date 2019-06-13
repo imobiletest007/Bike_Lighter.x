@@ -53,7 +53,7 @@
 uint8_t g_vison=0x00;
 uint8_t str1[160];
 extern uint8_t tmr1_flag_1s;
-extern uint8_t tmr1_flag_100ms;
+extern uint8_t tmr1_flag_10ms;
 
 extern uint8_t status1_value;
 extern uint8_t status2_value;
@@ -113,8 +113,8 @@ void main(void)
         if (acc_sensor_get_acc()) {
             acc_sensor_read_status();
             acc_sensor_clear_interrupt_status(); // it can read G-sensor INT 
-            if(tmr1_flag_100ms) {
-                tmr1_flag_100ms = 0;
+            if(tmr1_flag_10ms) {
+                tmr1_flag_10ms = 0;
                 gx1 = (int)gx;
                 gy1 = (int)gy;
                 gz1 = (int)gz;

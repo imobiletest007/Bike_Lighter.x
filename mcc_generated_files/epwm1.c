@@ -54,7 +54,7 @@
   Section: Macro Declarations
 */
 
-#define PWM1_INITIALIZE_DUTY_VALUE    251
+#define PWM1_INITIALIZE_DUTY_VALUE    249
 
 /**
   Section: EPWM Module APIs
@@ -64,8 +64,8 @@ void EPWM1_Initialize (void)
 {
     // Set the PWM to the options selected in PIC10 / PIC12 / PIC16 / PIC18 MCUs 
     
-    // CCP1M P1A,P1C: active high; P1B,P1D: active high; DC1B 3; P1M single; 
-    CCP1CON = 0x3C;
+    // CCP1M P1A,P1C: active high; P1B,P1D: active high; DC1B 1; P1M single; 
+    CCP1CON = 0x1C;
     
     // CCP1ASE operating; PSS1BD low; PSS1AC low; CCP1AS disabled; 
     ECCP1AS = 0x00;
